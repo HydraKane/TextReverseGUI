@@ -1,12 +1,12 @@
 # -*- coding=utf-8 -*-
 import tkinter as tk
 import tkinter.scrolledtext as scrolledtext
-import clipboard
+import pyperclip as cb
 from datetime import datetime
 
 def reverse_and_copy():
     # Get the text from the clipboard
-    input_text = clipboard.paste()
+    input_text = cb.paste()
 
     # Remove any '\r' characters
     input_text = input_text.replace("\r", "")
@@ -24,7 +24,7 @@ def reverse_and_copy():
     reversed_text = "\n".join(reversed_lines)
 
     # Set the reversed text back into the clipboard
-    clipboard.copy(reversed_text)
+    cb.copy(reversed_text)
 
     # Display the status line
     input_lines = len(lines)
