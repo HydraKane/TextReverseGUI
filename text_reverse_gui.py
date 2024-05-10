@@ -52,13 +52,14 @@ root.tk_setPalette(background="#333", foreground="white")
 combined_button = tk.Button(root, text="顛倒文字順序 & 複製到剪貼簿", command=reverse_and_copy)
 combined_button.pack(pady=5)
 
+# Create the read-only text area for displaying the output
+output_text_area = scrolledtext.ScrolledText(root, wrap=tk.WORD, height=10, width=1)
+output_text_area.pack(fill=tk.BOTH, padx=10, pady=10)
+output_text_area.config(state=tk.DISABLED)
+
 # Create the status label
 status_label = tk.Label(root, text="", anchor="w")
 status_label.pack(side=tk.BOTTOM, fill=tk.X, padx=10)
-
-# Create the read-only text area for displaying the output
-output_text_area = scrolledtext.ScrolledText(root, wrap=tk.WORD, height=10, width=40, state=tk.DISABLED)
-output_text_area.pack(padx=10, pady=10)
 
 # Start the tkinter event loop
 root.mainloop()
