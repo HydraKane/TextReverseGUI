@@ -5,8 +5,8 @@ import clipboard
 from datetime import datetime
 
 def reverse_and_copy():
-    # Get the text from the text area
-    input_text = text_area.get("1.0", "end-1c")
+    # Get the text from the clipboard
+    input_text = clipboard.paste()
 
     # Remove any '\r' characters
     input_text = input_text.replace("\r", "")
@@ -23,11 +23,7 @@ def reverse_and_copy():
     # Join the list elements back together using '\n' as the separator
     reversed_text = "\n".join(reversed_lines)
 
-    # Set the reversed text back into the text area
-    text_area.delete("1.0", "end")
-    text_area.insert("1.0", reversed_text)
-
-    # Copy the text to the clipboard
+    # Set the reversed text back into the clipboard
     clipboard.copy(reversed_text)
 
     # Display the status line
@@ -41,13 +37,10 @@ def reverse_and_copy():
 # Create the main window
 root = tk.Tk()
 root.title("文字順序顛倒")  # Set window title
+root.geometry("600x800")  # Set window size
 
 # Create a dark mode theme (optional)
 root.tk_setPalette(background="#333", foreground="white")
-
-# Create the text area
-text_area = scrolledtext.ScrolledText(root, wrap=tk.WORD, height=10, width=40)
-text_area.pack(padx=10, pady=10)
 
 # Create the combined button
 combined_button = tk.Button(root, text="顛倒文字順序 & 複製到剪貼簿", command=reverse_and_copy)
@@ -59,4 +52,3 @@ status_label.pack(side=tk.BOTTOM, fill=tk.X, padx=10)
 
 # Start the tkinter event loop
 root.mainloop()
-
