@@ -34,6 +34,12 @@ def reverse_and_copy():
     status_text = f"{datetime.now():%Y-%m-%d %H:%M:%S} 你貼上了 {input_lines} 行 {input_chars} 個字, 轉換成 {output_lines} 行 {output_chars} 個字, 複製完成!"
     status_label.config(text=status_text)
 
+    # Display the reversed text in the read-only text area
+    output_text_area.config(state=tk.NORMAL)
+    output_text_area.delete("1.0", "end")
+    output_text_area.insert("1.0", reversed_text)
+    output_text_area.config(state=tk.DISABLED)
+
 # Create the main window
 root = tk.Tk()
 root.title("文字順序顛倒")  # Set window title
@@ -50,5 +56,10 @@ combined_button.pack(pady=5)
 status_label = tk.Label(root, text="", anchor="w")
 status_label.pack(side=tk.BOTTOM, fill=tk.X, padx=10)
 
+# Create the read-only text area for displaying the output
+output_text_area = scrolledtext.ScrolledText(root, wrap=tk.WORD, height=10, width=40, state=tk.DISABLED)
+output_text_area.pack(padx=10, pady=10)
+
 # Start the tkinter event loop
 root.mainloop()
+
