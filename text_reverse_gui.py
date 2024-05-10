@@ -1,10 +1,9 @@
 import tkinter as tk
 import tkinter.scrolledtext as scrolledtext
 import tkinter.messagebox as messagebox
-import tkinter.simpledialog as simpledialog
-import pyperclip
+import clipboard
 
-def reverse_text():
+def reverse_and_copy():
     # Get the text from the text area
     input_text = text_area.get("1.0", "end-1c")
 
@@ -27,12 +26,8 @@ def reverse_text():
     text_area.delete("1.0", "end")
     text_area.insert("1.0", reversed_text)
 
-def copy_to_clipboard():
-    # Get the text from the text area
-    text_to_copy = text_area.get("1.0", "end-1c")
-
     # Copy the text to the clipboard
-    pyperclip.copy(text_to_copy)
+    clipboard.copy(reversed_text)
     messagebox.showinfo("複製成功", "已複製到剪貼簿！")
 
 # Create the main window
@@ -46,13 +41,9 @@ root.tk_setPalette(background="#333", foreground="white")
 text_area = scrolledtext.ScrolledText(root, wrap=tk.WORD, height=10, width=40)
 text_area.pack(padx=10, pady=10)
 
-# Create the buttons
-reverse_button = tk.Button(root, text="顛倒", command=reverse_text)
-reverse_button.pack(side=tk.LEFT, padx=5)
-
-copy_button = tk.Button(root, text="複製", command=copy_to_clipboard)
-copy_button.pack(side=tk.RIGHT, padx=5)
+# Create the combined button
+combined_button = tk.Button(root, text="顛倒文字順序 & 複製到剪貼簿", command=reverse_and_copy)
+combined_button.pack(pady=5)
 
 # Start the tkinter event loop
 root.mainloop()
-
