@@ -54,7 +54,7 @@ combined_button.pack(pady=5)
 
 # Create the read-only text area for displaying the output
 output_text_area = scrolledtext.ScrolledText(root, wrap=tk.WORD, height=10, width=1)
-output_text_area.pack(fill=tk.BOTH, padx=10, pady=10)
+output_text_area.pack(fill=tk.BOTH, padx=10, pady=10, expand=True)
 output_text_area.config(state=tk.DISABLED)
 
 # Create the status label
