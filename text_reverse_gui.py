@@ -1,7 +1,8 @@
+# -*- coding=utf-8 -*-
 import tkinter as tk
 import tkinter.scrolledtext as scrolledtext
-import tkinter.messagebox as messagebox
 import clipboard
+from datetime import datetime
 
 def reverse_and_copy():
     # Get the text from the text area
@@ -28,7 +29,14 @@ def reverse_and_copy():
 
     # Copy the text to the clipboard
     clipboard.copy(reversed_text)
-    messagebox.showinfo("複製成功", "已複製到剪貼簿！")
+
+    # Display the status line
+    input_lines = len(lines)
+    input_chars = sum(len(line) for line in lines)
+    output_lines = len(reversed_lines)
+    output_chars = len(reversed_text)
+    status_text = f"{datetime.now():%Y-%m-%d %H:%M:%S} 你貼上了 {input_lines} 行 {input_chars} 個字, 轉換成 {output_lines} 行 {output_chars} 個字, 複製完成!"
+    status_label.config(text=status_text)
 
 # Create the main window
 root = tk.Tk()
@@ -45,5 +53,10 @@ text_area.pack(padx=10, pady=10)
 combined_button = tk.Button(root, text="顛倒文字順序 & 複製到剪貼簿", command=reverse_and_copy)
 combined_button.pack(pady=5)
 
+# Create the status label
+status_label = tk.Label(root, text="", anchor="w")
+status_label.pack(side=tk.BOTTOM, fill=tk.X, padx=10)
+
 # Start the tkinter event loop
 root.mainloop()
+
